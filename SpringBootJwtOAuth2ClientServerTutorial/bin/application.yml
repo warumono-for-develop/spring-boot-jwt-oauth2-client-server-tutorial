@@ -1,0 +1,53 @@
+server: 
+  context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  profiles: 
+    active: loc
+  datasource: 
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari: 
+      connection-timeout: 30000
+      idle-timeout: 600000
+      minimum-idle: 2
+      maximum-pool-size: 30
+      pool-name: HikariPool
+      connection-test-query: SELECT 1
+      data-source-properties: 
+        cache-prep-stmts: true
+        prep-stmt-cache-size: 256
+        prep-stmt-cache-sql-limit: 2048
+        use-server-prep-stmts: true
+  jpa: 
+    show-sql: true
+    properties: 
+      hibernate: 
+        use_sql_comments: true
+        format_sql: true
+
+security: 
+  basic:
+    enabled: false
+  oauth2: 
+    client: 
+      id: your-client-id
+      client-id: client
+      client-secret: secret
+      access-token-validity-seconds: 86400
+      refresh-token-validity-seconds: 86400
+    resource: 
+      id: your-resource-id
+
+logging: 
+  config: classpath:logback-spring.xml
+  file: api
+
+springfox: 
+  documentation: 
+    swagger: 
+      enabled: true
+      v2: 
+        path: /v2/api-docs
